@@ -3,7 +3,9 @@ import './plugins/axios'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import '@/http'
 import vuetify from './plugins/vuetify'
+import '@/plugins/vuelidate'
 
 Vue.config.productionTip = false
 
