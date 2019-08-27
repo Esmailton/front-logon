@@ -13,6 +13,8 @@
                 name="user_name" 
                 label="Usuario" 
                 type="text"
+                :error-messages="userNameErrors"
+                :success="!$v.user.user_name.$invalid"
                 v-model.trim="$v.user.user_name.$model"
                 ></v-text-field>
               <v-text-field 
@@ -20,13 +22,18 @@
                 name="password" 
                 label="Senha" 
                 type="password"
+                :error-messages="passwordErrors"
+                :success="!$v.user.password.$invalid"
                 v-model.trim="$v.user.password.$model"
                 ></v-text-field>
             </v-form>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" @click="log">Entrar</v-btn>
+            <v-btn
+            :disabled="$v.$invalid"
+            color="primary" 
+            @click="submit">Entrar</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -58,9 +65,29 @@ export default {
         }
       }
   },
+  computed: {
+    userNameErrors () {
+      const errors = []
+      const userName = this.$v.user.user_name
+      if (!userName.$dirty) {return errors}
+      !userName.required && errors.push('É necessario um usuario para ter acesso ao sistema')
+      return errors
+    },
+    passwordErrors () {
+      const errors = []
+      const password = this.$v.user.password
+      if (!password.$dirty) {return errors}
+      !password.required && errors.push(`A senha é obrigatoria para ter acesso ao sistema`)
+      !password.minLength && errors.push(`Sua senha deve conter pelo menos 4 caracteres`)
+      return errors
+    }
+  },
   methods: {
     log() {
       console.log('Vuelidate: ', this.$v)
+    },
+    submit () {
+      console.log('User: ', this.user )
     }
   }
 };
