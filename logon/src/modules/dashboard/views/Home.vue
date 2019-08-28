@@ -3,9 +3,9 @@
 </template>
 
 <script>
-import http from "@/http"
+import http from '@/http'
 
 export default {
-  name: "Home"
+  name: 'Home'
 }
 </script>

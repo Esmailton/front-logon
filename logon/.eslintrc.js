@@ -16,6 +16,5 @@ module.exports = {
   }
 },
 {
-  "extends": "vuetify"
+  'extends': 'vuetify'
 }
-
