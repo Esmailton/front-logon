@@ -1,3 +1,3 @@
 export default {
-  login: { method: 'post', url: 'signin' }
+  signin: { method: 'post', url: 'user/' }
 }
