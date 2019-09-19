@@ -1,13 +1,14 @@
 import axios from 'axios'
-import services from './services'
 
 const API = 'http://localhost:5000/'
 
-const http = axios.create()
-http.defaults.baseURL = API
+const http = axios.create({
+  baseURL: API
+})
 
-// console.log(http.get('movement/'))
+const setBearerToken = token => {
+  http.defaults.headers.common['Authorization'] = `Bearer ${token}`
+}
 
-export { http }
-
-export default services
+export default http
+export { setBearerToken }

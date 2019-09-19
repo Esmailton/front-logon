@@ -1,7 +1,7 @@
 import { routes as auth } from '../modules/auth'
-import { routes as home } from '../modules/dashboard'
+import { routes as dashboard } from '../modules/dashboard'
 
 export default [
   ...auth,
-  ...home
+  ...dashboard
 ]

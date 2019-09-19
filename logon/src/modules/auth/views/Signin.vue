@@ -16,7 +16,7 @@
                 :error-messages="userNameErrors"
                 :success="!$v.user.user_name.$invalid"
                 v-model.trim="$v.user.user_name.$model"
-                ></v-text-field>
+              ></v-text-field>
               <v-text-field
                 prepend-icon="lock"
                 name="password"
@@ -25,15 +25,12 @@
                 :error-messages="passwordErrors"
                 :success="!$v.user.password.$invalid"
                 v-model.trim="$v.user.password.$model"
-                ></v-text-field>
+              ></v-text-field>
             </v-form>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn
-            :disabled="$v.$invalid"
-            color="primary"
-            @click="submit">Entrar</v-btn>
+            <v-btn :disabled="$v.$invalid" color="primary" @click="submit">Entrar</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -42,17 +39,16 @@
 </template>
 
 <script>
-
-import { required, minLength } from 'vuelidate/lib/validators'
-import {mapActions} from 'vuex'
+import { required, minLength } from "vuelidate/lib/validators";
+import { mapActions } from "vuex";
 
 export default {
-  nome: 'Login',
+  nome: "Login",
   data: () => ({
     user: {
-      user_name: '',
-      password: '',
-      operation_type: 'sign_in'
+      user_name: "",
+      password: "",
+      operation_type: "sign_in"
     }
   }),
   validations: {
@@ -67,28 +63,38 @@ export default {
     }
   },
   computed: {
-    userNameErrors () {
-      const errors = []
-      const userName = this.$v.user.user_name
-      if (!userName.$dirty) { return errors }
-      !userName.required && errors.push('É necessario um usuario para ter acesso ao sistema')
-      return errors
+    userNameErrors() {
+      const errors = [];
+      const userName = this.$v.user.user_name;
+      if (!userName.$dirty) {
+        return errors;
+      }
+      !userName.required &&
+        errors.push("É necessario um usuario para ter acesso ao sistema");
+      return errors;
     },
-    passwordErrors () {
-      const errors = []
-      const password = this.$v.user.password
-      if (!password.$dirty) { return errors }
-      !password.required && errors.push(`A senha é obrigatoria para ter acesso ao sistema`)
-      !password.minLength && errors.push(`Sua senha deve conter pelo menos 4 caracteres`)
-      return errors
+    passwordErrors() {
+      const errors = [];
+      const password = this.$v.user.password;
+      if (!password.$dirty) {
+        return errors;
+      }
+      !password.required &&
+        errors.push(`A senha é obrigatoria para ter acesso ao sistema`);
+      !password.minLength &&
+        errors.push(`Sua senha deve conter pelo menos 4 caracteres`);
+      return errors;
     }
   },
   methods: {
-    ...mapActions('auth', ['ActionDoLogin']),
-    submit () {
-      this.ActionDoLogin(this.user).then(res => {
-        console.log(res.data)
-      })
+    ...mapActions("auth", ["ActionDoLogin"]),
+    async submit() {
+      try {
+        await this.ActionDoLogin(this.user)
+        this.$router.push({ name: 'dashboard' })
+      } catch (error) {
+        alert('Usuario ou senha incorreta')
+      }
     }
   }
 }
