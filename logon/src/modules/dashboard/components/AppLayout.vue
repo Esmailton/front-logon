@@ -3,7 +3,7 @@
     <AppToolbar v-model="drawer" />
     <AppMenu v-model="drawer" />
 
-    <v-container>
+    <v-container grid-list-md>
         <v-flex>
             <slot />
         </v-flex>

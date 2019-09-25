@@ -5,7 +5,10 @@ export default async (to, from, next) => {
     try {
       await store.dispatch('auth/ActionCheckToken')
     } catch (err) {
-      next({ name: 'signin' })
+      next({
+        name: 'signin',
+        query: { redirect: to.fullPath }
+      })
     }
     if (store.getters['auth/hasToken'] && to.name === 'signin') {
       next({

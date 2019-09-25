@@ -77,7 +77,9 @@ export default {
   },
   data: () => ({
     items: [
-      { title: "Dashboard", icon: "dashboard", url: "/dashboard", exact: true }
+      { title: "Dashboard", icon: "dashboard", url: "/dashboard", exact: true },
+      { title: "Funcionarios", icon: "group", url: "/dashboard/employee", exact: true },
+      { title: "Financeiro", icon: "attach_money", url: "/dashboard/financeiro", exact: true }
     ],
     mini: false,
   })

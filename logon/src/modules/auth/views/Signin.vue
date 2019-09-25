@@ -3,7 +3,7 @@
     <v-layout justify-center align-center>
       <v-flex sx12 sm6 md4 lg3 xl3>
         <v-card class="elevation-12">
-          <v-toolbar color="primary" dark>
+          <v-toolbar color="primary">
             <v-toolbar-title>Logon - Autenticação</v-toolbar-title>
           </v-toolbar>
           <v-card-text>
@@ -91,7 +91,7 @@ export default {
     async submit() {
       try {
         await this.ActionDoLogin(this.user)
-        this.$router.push({ name: 'dashboard' })
+        this.$router.push(this.$route.query.redirect || 'dashboard')
       } catch (error) {
         alert('Usuario ou senha incorreta')
       }
