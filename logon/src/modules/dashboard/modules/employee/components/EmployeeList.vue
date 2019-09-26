@@ -2,13 +2,12 @@
   <div>
     <v-card>
       <v-card-title>
-        <v-toolbar color="orange lighten-4">
-          <v-btn class="ma-2" text icon color="green" @click="add">
-            <v-icon>person_add</v-icon>
-          </v-btn>
-          <v-spacer></v-spacer>
-          <v-text-field append-icon="search" label="Buscar" single-line hide-details></v-text-field>
-        </v-toolbar>
+        <v-btn class="ma-2" text icon color="green" @click="add">
+          <v-icon>person_add</v-icon>
+        </v-btn>
+        <v-spacer></v-spacer>
+        <v-text-field append-icon="search" label="Buscar" single-line hide-details></v-text-field>
+
       </v-card-title>
 
       <v-card-text>

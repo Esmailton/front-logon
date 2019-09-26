@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container>
+    <v-container >
       <v-layout row wrap>
         <v-flex>
           <EmployeeList />
@@ -10,7 +10,7 @@
   </div>
 </template>
 
-<script >
+<script>
 import EmployeeForm from "./../components/EmployeeForm.vue";
 import EmployeeList from "./../components/EmployeeList.vue";
 
