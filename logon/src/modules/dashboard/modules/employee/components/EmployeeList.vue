@@ -23,16 +23,15 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item in items" :key="item.name">
+            <tr v-for="item in items" :key="item.id">
               <td>
                 <v-list-item-avatar>
                   <v-img :src="item.avatar"></v-img>
                 </v-list-item-avatar>
               </td>
               <td>{{ item.name }}</td>
-              <td>{{ item.CPF }}</td>
-              <td>{{ item.data_nascimento }}</td>
-              <td>{{ item.cargo }}</td>
+              <td>{{ item.address[0]}}</td>
+
               <td class="text-center">
                 <v-btn class="ma-2" text icon color="orange">
                   <v-icon>edit</v-icon>
@@ -57,47 +56,33 @@
     </v-layout>
   </div>
 </template>
-
+ 
 <script>
 import EmployeeForm from "./EmployeeForm.vue";
+import {employeeResponse} from '../service/employeeService'
 
 export default {
   name: "EmployeeList",
   components: {
     EmployeeForm
   },
+
   data() {
     return {
-      items: [
-        {
-          name: "Esmailton Silva Gomes",
-          CPF: "123.123.000-21",
-          cargo: "Gerente",
-          avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-          data_nascimento: "11/22/2222"
-        },
-        {
-          name: "Marcelo Ferreira dos Santos",
-          CPF: "123.123.000-21",
-          cargo: "Gerente",
-          avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-          data_nascimento: "11/22/2222"
-        },
-        {
-          name: "Danusia Maximo da Silva Souza",
-          CPF: "123.123.000-21",
-          cargo: "Gerente",
-          avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-          data_nascimento: "11/22/2222"
-        }
-      ],
+      items:'',
       showDialogAddEmployee: false
     };
+  },
+  mounted() {
+    employeeResponse().then(response => {
+      this.items = response.data.employees
+      console.log(this.items)
+    })
   },
   methods: {
     add() {
       this.showDialogAddEmployee = true;
-    }
+    },
   }
 };
 </script>

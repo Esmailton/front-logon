@@ -1,29 +1,19 @@
 <template>
   <v-card>
     <v-card-title>
-      <v-toolbar color="primary">
-        <v-toolbar-title>FINCIONARIO</v-toolbar-title>
-      </v-toolbar>
+      <!-- <v-toolbar color="primary">
+        <v-toolbar-title>FUNCIONARIO</v-toolbar-title>
+      </v-toolbar> -->
     </v-card-title>
     <v-card-text>
       <v-form elevation-20>
         <v-row>
           <v-col cols="12" sm="6">
-            <v-text-field
-              name="name"
-              label="Nome Completo"
-              id="name"
-              v-model="$v.item.name.$model"
-            ></v-text-field>
+            <v-text-field name="name" label="Nome Completo" id="name" v-model="$v.item.name.$model"></v-text-field>
           </v-col>
 
           <v-col cols="12" sm="4">
-            <v-text-field 
-              name="cpf" 
-              label="CPF" 
-              id="cpf" 
-              v-model="$v.item.cpf.$model"
-              ></v-text-field>
+            <v-text-field name="cpf" label="CPF" id="cpf" v-model="$v.item.cpf.$model"></v-text-field>
           </v-col>
 
           <v-col cols="12" sm="2">
@@ -56,41 +46,21 @@
           </v-col>
 
           <v-col cols="12" sm="2">
-            <v-text-field
-              name="number"
-              label="Número"
-              id="number"
-              v-model="$v.item.number.$model"
-            ></v-text-field>
+            <v-text-field name="number" label="Número" id="number" v-model="$v.item.number.$model"></v-text-field>
           </v-col>
 
           <v-col cols="12" sm="2">
-            <v-text-field 
-              name="cep" 
-              label="CEP" 
-              id="cep" 
-              v-model="$v.item.cep.$model"
-              ></v-text-field>
+            <v-text-field name="cep" label="CEP" id="cep" v-model="$v.item.cep.$model"></v-text-field>
           </v-col>
         </v-row>
 
         <v-row>
           <v-col cols="12" sm="4">
-            <v-text-field 
-              name="city" 
-              label="Cidade" 
-              id="city" 
-              v-model="$v.item.city.$model"
-              ></v-text-field>
+            <v-text-field name="city" label="Cidade" id="city" v-model="$v.item.city.$model"></v-text-field>
           </v-col>
 
           <v-col cols="12" sm="1">
-            <v-text-field 
-              name="uf" 
-              label="UF" 
-              id="uf" 
-              v-model="$v.item.uf.$model"
-              ></v-text-field>
+            <v-text-field name="uf" label="UF" id="uf" v-model="$v.item.uf.$model"></v-text-field>
           </v-col>
 
           <v-col cols="12" sm="3">
@@ -103,23 +73,14 @@
           </v-col>
 
           <v-col cols="12" sm="4">
-            <v-text-field
-              name="email"
-              label="E-mail"
-              id="email"
-              v-model="$v.item.email.$model"
-            ></v-text-field>
+            <v-text-field name="email" label="E-mail" id="email" v-model="$v.item.email.$model"></v-text-field>
           </v-col>
         </v-row>
       </v-form>
     </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-btn 
-        color="primary" 
-        :disabled="$v.$invalid"
-        @click="save"
-        >SALVAR</v-btn>
+      <v-btn color="primary" :disabled="$v.$invalid" @click="save">SALVAR</v-btn>
       <v-btn color="red">SAIR</v-btn>
     </v-card-actions>
     <v-footer>LOGON</v-footer>
@@ -128,6 +89,8 @@
 
 <script>
 import { required, email, numeric, minLength } from "vuelidate/lib/validators";
+import {add} from '../service/employeeService'
+
 
 export default {
   name: "EmployeeAdd",
@@ -188,17 +151,18 @@ export default {
           minLength: minLength(8)
         },
         email: {
+          required,
           email
         }
       }
-    };
-
+    }
     return validations
   },
   methods: {
-    save() {
-      console.log("Funcionarios", this.item);
+    save () {
+      add(this.item)
     }
   }
-};
+}
+
 </script>
